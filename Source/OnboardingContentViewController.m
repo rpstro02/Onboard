@@ -110,16 +110,13 @@ NSString * const kOnboardActionButtonAccessibilityIdentifier = @"OnboardActionBu
 	}
     
     // default title properties
-    self.titleFontName = kDefaultOnboardingFont;
-    self.titleFontSize = kDefaultTitleFontSize;
+    self.titleFont = [UIFont systemFontOfSize:kDefaultTitleFontSize];
     
     // default body properties
-    self.bodyFontName = kDefaultOnboardingFont;
-    self.bodyFontSize = kDefaultBodyFontSize;
+    self.bodyFont = [UIFont systemFontOfSize:kDefaultBodyFontSize];
     
     // default button properties
-    self.buttonFontName = kDefaultOnboardingFont;
-    self.buttonFontSize = kDefaultButtonFontSize;
+    self.buttonFont = [UIFont systemFontOfSize:kDefaultButtonFontSize];
     
     // default padding values
     self.topPadding = kDefaultTopPadding;
@@ -264,7 +261,7 @@ NSString * const kOnboardActionButtonAccessibilityIdentifier = @"OnboardActionBu
     _mainTextLabel.accessibilityIdentifier = kOnboardMainTextAccessibilityIdentifier;
     _mainTextLabel.text = _titleText;
     _mainTextLabel.textColor = self.titleTextColor;
-    _mainTextLabel.font = [UIFont fontWithName:self.titleFontName size:self.titleFontSize];
+    _mainTextLabel.font = self.titleFont;
     _mainTextLabel.numberOfLines = 0;
     _mainTextLabel.textAlignment = NSTextAlignmentCenter;
     [_mainTextLabel sizeToFit];
@@ -276,7 +273,7 @@ NSString * const kOnboardActionButtonAccessibilityIdentifier = @"OnboardActionBu
     _subTextLabel.accessibilityIdentifier = kOnboardSubTextAccessibilityIdentifier;
     _subTextLabel.text = _body;
     _subTextLabel.textColor = self.bodyTextColor;
-    _subTextLabel.font = [UIFont fontWithName:self.bodyFontName size:self.bodyFontSize];
+    _subTextLabel.font = self.bodyFont;
     _subTextLabel.numberOfLines = 0;
     _subTextLabel.textAlignment = NSTextAlignmentCenter;
     [_subTextLabel sizeToFit];
@@ -287,7 +284,7 @@ NSString * const kOnboardActionButtonAccessibilityIdentifier = @"OnboardActionBu
     if (_buttonText) {
         _actionButton = [[UIButton alloc] initWithFrame:CGRectMake((CGRectGetMaxX(self.view.frame) / 2) - (contentWidth / 2), CGRectGetMaxY(self.view.frame) - self.underPageControlPadding - kMainPageControlHeight - kActionButtonHeight - self.bottomPadding, contentWidth, kActionButtonHeight)];
         _actionButton.accessibilityIdentifier = kOnboardActionButtonAccessibilityIdentifier;
-        _actionButton.titleLabel.font = [UIFont fontWithName:self.buttonFontName size:self.buttonFontSize];
+        _actionButton.titleLabel.font = self.buttonFont;
         [_actionButton setTitle:_buttonText forState:UIControlStateNormal];
         [_actionButton setTitleColor:self.buttonTextColor forState:UIControlStateNormal];
         [_actionButton addTarget:self action:@selector(handleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -343,6 +340,62 @@ NSString * const kOnboardActionButtonAccessibilityIdentifier = @"OnboardActionBu
     if (_buttonActionHandler) {
         _buttonActionHandler(self.delegate);
     }
+}
+
+#pragma mark - deprecated font property setters
+
+-(void)setButtonFontName:(NSString *)buttonFontName{
+    CGFloat fontSize = [self buttonFontSize];
+    self.buttonFont = [UIFont fontWithName:buttonFontName size:fontSize];
+}
+
+-(NSString *)buttonFontName{
+    return [self.buttonFont fontName];
+}
+
+-(void)setButtonFontSize:(CGFloat)buttonFontSize{
+    NSString *fontName = [self buttonFontName];
+    self.buttonFont = [UIFont fontWithName:fontName size:buttonFontSize];
+}
+
+-(CGFloat)buttonFontSize{
+    return [self.buttonFont pointSize];
+}
+
+-(void)setBodyFontName:(NSString *)bodyFontName{
+    CGFloat fontSize = [self bodyFontSize];
+    self.bodyFont = [UIFont fontWithName:bodyFontName size:fontSize];
+}
+
+-(NSString *)bodyFontName{
+    return [self.bodyFont fontName];
+}
+
+-(void)setBodyFontSize:(CGFloat)bodyFontSize{
+    NSString *fontName = [self bodyFontName];
+    self.bodyFont = [UIFont fontWithName:fontName size:bodyFontSize];
+}
+
+-(CGFloat)bodyFontSize{
+    return [self.bodyFont pointSize];
+}
+
+-(void)setTitleFontName:(NSString *)titleFontName{
+    CGFloat fontSize = [self titleFontSize];
+    self.titleFont = [UIFont fontWithName:titleFontName size:fontSize];
+}
+
+-(NSString *)titleFontName{
+    return [self.titleFont fontName];
+}
+
+-(void)setTitleFontSize:(CGFloat)titleFontSize{
+    NSString *fontName = [self titleFontName];
+    self.titleFont = [UIFont fontWithName:fontName size:titleFontSize];
+}
+
+-(CGFloat)titleFontSize{
+    return [self.titleFont pointSize];
 }
 
 @end

@@ -65,16 +65,11 @@
 @property (nonatomic, strong) UIColor *bodyTextColor;
 @property (nonatomic, strong) UIColor *buttonTextColor;
 
-@property (nonatomic, strong) NSString *fontName; // to set the same font for everything
+@property (nonatomic, strong) UIFont *font;     // to set the same font for everything
 
-@property (nonatomic, strong) NSString *titleFontName;
-@property (nonatomic) CGFloat titleFontSize;
-
-@property (nonatomic, strong) NSString *bodyFontName;
-@property (nonatomic) CGFloat bodyFontSize;
-
-@property (nonatomic, strong) NSString *buttonFontName;
-@property (nonatomic) CGFloat buttonFontSize;
+@property (nonatomic, strong) UIFont *titleFont;
+@property (nonatomic, strong) UIFont *bodyFont;
+@property (nonatomic, strong) UIFont *buttonFont;
 
 @property (nonatomic) CGFloat topPadding;
 @property (nonatomic) CGFloat underIconPadding;
@@ -91,5 +86,14 @@
 - (void)setNextPage:(OnboardingContentViewController *)nextPage;
 ////////////////////////////////////////////////////////////////////
 
+
+// Deprecated font properties
+@property (nonatomic, strong) NSString *fontName       __deprecated_msg("setting fonts by name and size has been deprecated. Use UIFont properties instead");
+@property (nonatomic, strong) NSString *buttonFontName      __deprecated_msg("setting fonts by name and size has been deprecated. Use UIFont properties instead");
+@property (nonatomic) CGFloat buttonFontSize                __deprecated_msg("setting fonts by name and size has been deprecated. Use UIFont properties instead");
+@property (nonatomic, strong) NSString *bodyFontName   __deprecated_msg("setting fonts by name and size has been deprecated. Use UIFont properties instead");
+@property (nonatomic) CGFloat bodyFontSize             __deprecated_msg("setting fonts by name and size has been deprecated. Use UIFont properties instead");
+@property (nonatomic, strong) NSString *titleFontName  __deprecated_msg("setting fonts by name and size has been deprecated. Use UIFont properties instead");
+@property (nonatomic) CGFloat titleFontSize            __deprecated_msg("setting fonts by name and size has been deprecated. Use UIFont properties instead");
 
 @end
